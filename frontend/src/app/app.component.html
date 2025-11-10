@@ -1,1 +1,23 @@
-<router-outlet />
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="app-toolbar__title">Smart Inventory Tracker</span>
+  <span class="app-toolbar__spacer"></span>
+
+  <ng-container *ngIf="isAuthenticated(); else guestLinks">
+    <nav class="app-toolbar__nav">
+      <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Health</a>
+      <a mat-button routerLink="/inventory" routerLinkActive="active">Inventory</a>
+    </nav>
+    <mat-icon fontIcon="person" class="app-toolbar__icon"></mat-icon>
+    <span class="app-toolbar__user">{{ user()?.email }}</span>
+    <button mat-stroked-button color="accent" (click)="signOut()">Sign Out</button>
+  </ng-container>
+
+  <ng-template #guestLinks>
+    <a mat-button routerLink="/auth/login">Sign In</a>
+    <a mat-stroked-button color="accent" routerLink="/auth/register">Register</a>
+  </ng-template>
+</mat-toolbar>
+
+<main class="app-shell">
+  <router-outlet />
+</main>

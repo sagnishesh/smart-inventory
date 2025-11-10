@@ -1,0 +1,90 @@
+.inventory {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.inventory__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+    color: #475569;
+  }
+}
+
+.inventory__filter {
+  width: min(400px, 100%);
+}
+
+.inventory__table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: #fff;
+  box-shadow: 0 20px 45px -24px rgba(15, 23, 42, 0.25);
+}
+
+table {
+  width: 100%;
+  min-width: 720px;
+}
+
+.inventory__cell-primary {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.inventory__cell-secondary {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.inventory__quantity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.inventory__quantity-threshold {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.inventory__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.inventory__empty {
+  margin: 4rem auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  color: #475569;
+
+  mat-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    color: #94a3b8;
+  }
+}
+

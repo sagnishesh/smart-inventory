@@ -6,8 +6,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Store } from '@ngrx/store';
 
 import { HealthService, HealthStatus } from '../../core/services/health.service';
+import { selectAuthUser } from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-health-check',
@@ -20,10 +22,12 @@ export class HealthCheckComponent {
 
   private readonly healthService = inject(HealthService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly store = inject(Store);
 
   readonly loading = signal(false);
   readonly status = signal<HealthStatus | null>(null);
   readonly error = signal<string | null>(null);
+  readonly currentUser = this.store.selectSignal(selectAuthUser);
 
   constructor() {
     this.runHealthCheck();

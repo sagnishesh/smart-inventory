@@ -1,8 +1,12 @@
 <section class="flex min-h-screen items-center justify-center bg-slate-100 p-6">
-  <mat-card appearance="outlined" class="w-full max-w-xl shadow-none bg-white">
-    <mat-card-header>
-      <mat-card-title>Backend Health Check</mat-card-title>
-      <mat-card-subtitle>Verify connectivity between frontend and Spring Boot API</mat-card-subtitle>
+  <mat-card appearance="outlined" class="w-full max-w-3xl shadow-none bg-white">
+    <mat-card-header class="flex flex-col items-start gap-1">
+      <mat-card-title class="text-xl font-semibold">Platform Health Overview</mat-card-title>
+      <mat-card-subtitle>Verifies frontend ↔ backend connectivity in real time.</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="currentUser()" class="text-sm text-slate-500">
+        Signed in as <span class="font-medium text-slate-700">{{ currentUser()?.email }}</span> · Role:
+        <span class="font-medium uppercase">{{ currentUser()?.role }}</span>
+      </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -23,10 +27,10 @@
               <mat-icon fontIcon="check_circle_outline"></mat-icon>
               <span class="text-lg font-medium">Healthy connection established</span>
             </div>
-            <p class="text-sm text-slate-600">
-              Backend response:
-              <span class="font-mono text-base text-slate-800">{{ status()?.status }}</span>
-            </p>
+            <div class="rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm text-slate-700">
+              <div class="font-medium text-slate-900">Backend response payload</div>
+              <code class="block font-mono text-sm text-slate-800">{{ status()?.status }}</code>
+            </div>
           </div>
         </ng-template>
       </ng-template>

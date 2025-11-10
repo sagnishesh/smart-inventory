@@ -1,0 +1,60 @@
+@use 'sass:color';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+
+    a.active {
+      background: rgba(255, 255, 255, 0.16);
+    }
+  }
+
+  &__icon {
+    margin-right: 0.25rem;
+  }
+
+  &__user {
+    margin-right: 1rem;
+    font-weight: 500;
+  }
+
+  a[mat-button],
+  a[mat-stroked-button] {
+    text-decoration: none;
+  }
+}
+
+.app-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
