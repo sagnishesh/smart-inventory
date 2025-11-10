@@ -1,0 +1,29 @@
+.DS_Store
+/.idea/
+/.vscode/
+/tmp/
+/logs/
+
+# Environment configuration
+.env
+.env.local
+.env.development.local
+.env.production.local
+!.env.example
+
+# Node / Angular
+node_modules/
+dist/
+coverage/
+.angular/
+
+# Java / Spring Boot
+target/
+*.class
+*.iml
+*.log
+/.mvn/wrapper/maven-wrapper.jar
+
+# OS generated files
+Thumbs.db
+

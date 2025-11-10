@@ -1,0 +1,42 @@
+<section class="flex min-h-screen items-center justify-center bg-slate-100 p-6">
+  <mat-card appearance="outlined" class="w-full max-w-xl shadow-none bg-white">
+    <mat-card-header>
+      <mat-card-title>Backend Health Check</mat-card-title>
+      <mat-card-subtitle>Verify connectivity between frontend and Spring Boot API</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div *ngIf="loading(); else result" class="flex items-center gap-3 text-slate-600">
+        <mat-spinner diameter="32"></mat-spinner>
+        <span>Requesting status from the backend...</span>
+      </div>
+
+      <ng-template #result>
+        <div *ngIf="error(); else successState" class="flex items-center gap-3 text-red-600">
+          <mat-icon fontIcon="error_outline"></mat-icon>
+          <span>{{ error() }}</span>
+        </div>
+
+        <ng-template #successState>
+          <div class="flex flex-col gap-2 text-blue-600">
+            <div class="flex items-center gap-3">
+              <mat-icon fontIcon="check_circle_outline"></mat-icon>
+              <span class="text-lg font-medium">Healthy connection established</span>
+            </div>
+            <p class="text-sm text-slate-600">
+              Backend response:
+              <span class="font-mono text-base text-slate-800">{{ status()?.status }}</span>
+            </p>
+          </div>
+        </ng-template>
+      </ng-template>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="runHealthCheck()" [disabled]="loading()">
+        <mat-icon fontIcon="refresh"></mat-icon>
+        <span class="ml-2">Retry</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</section>
