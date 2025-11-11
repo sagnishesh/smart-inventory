@@ -22,6 +22,8 @@ import {
 } from '../../store/inventory/inventory.selectors';
 import { InventoryFormDialogComponent, InventoryDialogData } from './inventory-form-dialog.component';
 import { firstValueFrom } from 'rxjs';
+import { selectAuthUser } from '../../store/auth/auth.selectors';
+import { UserRole } from '../../core/types/user.model';
 
 @Component({
   selector: 'app-inventory-page',
@@ -52,6 +54,10 @@ export class InventoryPageComponent {
   readonly processing = this.store.selectSignal(selectInventoryProcessing);
   readonly error = this.store.selectSignal(selectInventoryError);
 
+  readonly currentUser = this.store.selectSignal(selectAuthUser);
+  readonly role = computed<UserRole>(() => this.currentUser()?.role ?? 'STAFF');
+  readonly canDelete = computed(() => this.role() === 'ADMIN');
+
   readonly filter = signal('');
   readonly displayedColumns = ['name', 'sku', 'supplier', 'quantity', 'price', 'status', 'actions'];
 
@@ -79,7 +85,8 @@ export class InventoryPageComponent {
 
   openCreateDialog(): void {
     this.openDialog({
-      title: 'Add inventory item'
+      title: 'Add inventory item',
+      role: this.role()
     }).then((payload) => {
       if (payload) {
         this.store.dispatch(inventoryActions.createItem({ payload }));
@@ -90,7 +97,8 @@ export class InventoryPageComponent {
   openEditDialog(item: InventoryItem): void {
     this.openDialog({
       title: 'Edit inventory item',
-      item
+      item,
+      role: this.role()
     }).then((payload) => {
       if (payload) {
         this.store.dispatch(inventoryActions.updateItem({ id: item.id, payload }));

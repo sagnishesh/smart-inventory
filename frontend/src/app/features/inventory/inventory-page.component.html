@@ -88,7 +88,14 @@
           <button mat-icon-button matTooltip="Edit item" (click)="openEditDialog(item)" [disabled]="processing()">
             <mat-icon fontIcon="edit"></mat-icon>
           </button>
-          <button mat-icon-button color="warn" matTooltip="Remove item" (click)="deleteItem(item)" [disabled]="processing()">
+          <button
+            *ngIf="canDelete()"
+            mat-icon-button
+            color="warn"
+            matTooltip="Remove item"
+            (click)="deleteItem(item)"
+            [disabled]="processing()"
+          >
             <mat-icon fontIcon="delete"></mat-icon>
           </button>
         </td>
